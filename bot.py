@@ -68,5 +68,21 @@ async def agregar_parcial(ctx, materia, *, fecha):
     parciales[materia] = fecha
     await ctx.send(f"✅ Parcial de **{materia}** agregado para el **{fecha}**")
 
+# Servidor web falso para mantener a Render feliz
+from flask import Flask
+import threading
+
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Bot de Discord activo!"
+
+def run():
+    port = int(os.getenv('PORT', 10000))
+    app.run(host='0.0.0.0', port=port)
+
+threading.Thread(target=run).start()
+
 # Ejecutar el bot
 bot.run(os.getenv('DISCORD_TOKEN'))
